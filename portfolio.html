@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch™ Engineering - Pioneering Digital Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles & Variables */
+        :root {
+            --primary-bg: #1a1d23;
+            --secondary-bg: #2d3138;
+            --text-color: #e0e0e0;
+            --highlight-color: #4CAF50; /* Green theme */
+            --highlight-hover: #3e8e41;
+            --border-color: #444;
+            --card-shadow: rgba(0, 0, 0, 0.6);
+            --font-main: 'Inter', sans-serif;
+            --font-heading: 'Montserrat', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--highlight-hover);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--text-color);
+            margin-bottom: 0.5em;
+        }
+
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: var(--highlight-color);
+            position: relative;
+            padding-bottom: 10px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--highlight-color);
+            border-radius: 5px;
+        }
+
+        /* --- Header --- */
+        .main-header {
+            background-color: var(--secondary-bg);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text-color);
+            text-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+            margin-right: 20px; /* Space from nav */
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: center; /* Center nav items when wrapped */
+        }
+
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1em;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--highlight-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #111317 100%);
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #home h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+            animation: slideInUp 1s ease-out;
+        }
+
+        #home p {
+            font-size: 1.8em;
+            max-width: 800px;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+            opacity: 0; /* Start hidden */
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--highlight-color);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            animation: scaleIn 1s ease-out 1s forwards;
+            transform: scale(0); /* Start hidden */
+        }
+
+        .hero-btn:hover {
+            background-color: var(--highlight-hover);
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* --- About Section --- */
+        #about {
+            background-color: var(--secondary-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #about p {
+            font-size: 1.15em;
+            max-width: 900px;
+            margin: 0 auto 1.5em auto;
+            text-align: justify;
+        }
+
+        #about .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        #about .about-card {
+            background-color: var(--primary-bg);
+            border-radius: 12px;
+            padding: 30px;
+            flex: 1 1 calc(33% - 30px); /* Adjust for 3 columns */
+            min-width: 280px;
+            max-width: 380px;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        #about .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px var(--card-shadow);
+        }
+
+        #about .about-card h3 {
+            color: var(--highlight-color);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #about .about-card h3 i {
+            font-size: 1.2em;
+        }
+
+        /* --- Skills Section --- */
+        #skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        #skills .skill-category {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        #skills .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        #skills .skill-category h3 {
+            color: var(--highlight-color);
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #skills .skill-category h3 i {
+            font-size: 1.2em;
+        }
+
+        #skills .skill-category ul {
+            list-style: none;
+        }
+
+        #skills .skill-category li {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #skills .skill-category li i {
+            color: var(--highlight-color);
+            font-size: 0.9em;
+        }
+
+        /* --- Projects Section --- */
+        #projects {
+            background-color: var(--primary-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #projects .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        #projects .project-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            overflow: hidden;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push footer to bottom */
+        }
+
+        #projects .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px var(--card-shadow);
+        }
+
+        #projects .project-card-content {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        #projects .project-card h3 {
+            color: var(--highlight-color);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        #projects .project-card p {
+            font-size: 1em;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        #projects .project-card .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        #projects .project-card .tech-badge {
+            background-color: var(--primary-bg);
+            color: var(--highlight-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        #projects .project-card-footer {
+            background-color: var(--primary-bg);
+            padding: 15px 25px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #projects .project-card-footer a {
+            color: var(--text-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #projects .project-card-footer a i {
+            font-size: 1.1em;
+        }
+
+        #projects .project-card-footer a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* --- Engagement Section --- */
+        #engagement {
+            background-color: var(--secondary-bg);
+        }
+
+        #engagement .engagement-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #engagement p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        #engagement .engagement-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        #engagement .engagement-links a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--highlight-color);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--card-shadow);
+        }
+
+        #engagement .engagement-links a:hover {
+            background-color: var(--highlight-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--card-shadow);
+        }
+
+        #engagement .engagement-links a i {
+            font-size: 1.3em;
+        }
+
+        /* --- Footer --- */
+        .main-footer {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            padding: 30px 5%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9em;
+        }
+
+        .main-footer p {
+            margin-bottom: 10px;
+        }
+
+        .main-footer .footer-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .main-footer .footer-nav a {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .main-footer .footer-nav a:hover {
+            color: var(--highlight-color);
+            opacity: 1;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .main-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+            .main-nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            #home {
+                height: auto;
+                min-height: 80vh;
+                padding: 60px 5%;
+            }
+            #home h1 {
+                font-size: 3em;
+            }
+            #home p {
+                font-size: 1.4em;
+            }
+            .hero-btn {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+
+            #about .about-card {
+                flex: 1 1 100%; /* Stack on small screens */
+                max-width: 100%;
+            }
+            #skills .skills-grid {
+                grid-template-columns: 1fr; /* Stack on small screens */
+            }
+            #projects .projects-grid {
+                grid-template-columns: 1fr; /* Stack on small screens */
+            }
+            #engagement .engagement-links {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #home h1 {
+                font-size: 2.2em;
+            }
+            #home p {
+                font-size: 1.1em;
+            }
+            .section-title {
+                font-size: 1.8em;
+            }
+            .hero-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo">Switch™ Engineering</div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#engagement">Engage</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home/Hero Section -->
+    <section id="home">
+        <h1>Pioneering Digital Frontiers.</h1>
+        <p>At Switch™ Engineering, we transform complex challenges into elegant, high-performance solutions. Our ethos: relentless innovation, precision engineering, and profound impact.</p>
+        <a href="#projects" class="hero-btn">Explore Our Work</a>
+    </section>
+
+    <!-- About/Ethos Section -->
+    <section id="about">
+        <h2 class="section-title">The Switch™ Philosophy</h2>
+        <p>
+            Operating beyond conventional paradigms, Switch™ Engineering is a collective of visionary problem-solvers dedicated to advancing the state of the art in technology. We believe in the power of code to reshape industries, empower communities, and unlock unprecedented possibilities. Our work is driven by an insatiable curiosity, a commitment to engineering excellence, and a passion for crafting systems that are not only functional but also elegantly designed and profoundly impactful.
+        </p>
+        <p>
+            Our anonymous presence underscores our focus on the work itself—the innovation, the code, the solutions—rather than individual accolades. We prioritize the pursuit of knowledge and the creation of value, letting our contributions speak for themselves.
+        </p>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3><i class="fas fa-lightbulb"></i> Innovation First</h3>
+                <p>We constantly seek out novel approaches and push the boundaries of what's possible, embracing new technologies and methodologies.</p>
+            </div>
+            <div class="about-card">
+                <h3><i class="fas fa-cogs"></i> Engineering Excellence</h3>
+                <p>Our solutions are built with meticulous attention to detail, emphasizing robustness, scalability, and maintainability.</p>
+            </div>
+            <div class="about-card">
+                <h3><i class="fas fa-users-cog"></i> Collaborative Power</h3>
+                <p>We thrive in open environments, believing that the greatest achievements come from shared knowledge and collective effort.</p>
+            </div>
+            <div class="about-card">
+                <h3><i class="fas fa-shield-alt"></i> Secure by Design</h3>
+                <p>Security and privacy are fundamental pillars of our development process, ensuring trust and integrity in every system.</p>
+            </div>
+            <div class="about-card">
+                <h3><i class="fas fa-chart-line"></i> Impact-Driven</h3>
+                <p>Our ultimate goal is to create solutions that deliver tangible, positive impact, solving real-world problems with technological elegance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Our Technical Arsenal</h2>
+        <p>
+            Our expertise spans a broad spectrum of cutting-edge technologies, enabling us to tackle diverse challenges and build sophisticated systems across various domains.
+        </p>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fas fa-brain"></i> AI & Machine Learning</h3>
+                <ul>
+                    <li><i class="fas fa-angle-right"></i> Deep Learning Frameworks (TensorFlow, PyTorch)</li>
+                    <li><i class="fas fa-angle-right"></i> Natural Language Processing (NLP)</li>
+                    <li><i class="fas fa-angle-right"></i> Computer Vision</li>
+                    <li><i class="fas fa-angle-right"></i> Reinforcement Learning</li>
+                    <li><i class="fas fa-angle-right"></i> Model Deployment (MLOps)</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Core Languages & Paradigms</h3>
+                <ul>
+                    <li><i class="fas fa-angle-right"></i> Python (Advanced)</li>
+                    <li><i class="fas fa-angle-right"></i> JavaScript (Node.js, ESNext)</li>
+                    <li><i class="fas fa-angle-right"></i> Go (Concurrency, Microservices)</li>
+                    <li><i class="fas fa-angle-right"></i> Rust (System Programming, Performance)</li>
+                    <li><i class="fas fa-angle-right"></i> Functional Programming Concepts</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-globe"></i> Web & Cloud Platforms</h3>
+                <ul>
+                    <li><i class="fas fa-angle-right"></i> React.js, Vue.js (Frontend)</li>
+                    <li><i class="fas fa-angle-right"></i> RESTful APIs, GraphQL</li>
+                    <li><i class="fas fa-angle-right"></i> AWS, Google Cloud Platform (GCP)</li>
+                    <li><i class="fas fa-angle-right"></i> Serverless Architectures (Lambda, Cloud Functions)</li>
+                    <li><i class="fas fa-angle-right"></i> Docker, Kubernetes (Containerization)</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-database"></i> Data & Databases</h3>
+                <ul>
+                    <li><i class="fas fa-angle-right"></i> SQL (PostgreSQL, MySQL)</li>
+                    <li><i class="fas fa-angle-right"></i> NoSQL (MongoDB, Cassandra)</li>
+                    <li><i class="fas fa-angle-right"></i> Data Warehousing / Lakes</li>
+                    <li><i class="fas fa-angle-right"></i> Real-time Data Streaming (Kafka)</li>
+                    <li><i class="fas fa-angle-right"></i> Big Data Technologies (Spark, Hadoop)</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> DevOps & Tools</h3>
+                <ul>
+                    <li><i class="fas fa-angle-right"></i> CI/CD Pipelines (GitHub Actions, GitLab CI)</li>
+                    <li><i class="fas fa-angle-right"></i> Infrastructure as Code (Terraform, Ansible)</li>
+                    <li><i class="fas fa-angle-right"></i> Git & Version Control</li>
+                    <li><i class="fas fa-angle-right"></i> Monitoring & Logging (Prometheus, Grafana)</li>
+                    <li><i class="fas fa-angle-right"></i> Agile Methodologies</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fas fa-project-diagram"></i> Architecture & Design</h3>
+                <ul>
+                    <li><i class="fas fa-angle-right"></i> Microservices Architecture</li>
+                    <li><i class="fas fa-angle-right"></i> Distributed Systems Design</li>
+                    <li><i class="fas fa-angle-right"></i> System Resilience & Fault Tolerance</li>
+                    <li><i class="fas fa-angle-right"></i> Performance Optimization</li>
+                    <li><i class="fas fa-angle-right"></i> Security Architecture</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Our Work in Action</h2>
+        <p>
+            Below are a few representative projects that showcase our capabilities and the diverse range of problems we love to solve. Each project embodies our commitment to innovation and engineering excellence.
+        </p>
+        <div class="projects-grid">
+            <!-- Project Card 1 -->
+            <div class="project-card">
+                <div class="project-card-content">
+                    <h3>AI-Powered Content Generation Platform</h3>
+                    <p>
+                        A scalable platform for generating high-quality textual content using advanced transformer models. Features include prompt engineering, style transfer, and multi-modal integration.
+                    </p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">PyTorch</span>
+                        <span class="tech-badge">FastAPI</span>
+                        <span class="tech-badge">Kubernetes</span>
+                        <span class="tech-badge">GCP</span>
+                    </div>
+                </div>
+                <div class="project-card-footer">
+                    <a href="https://github.com/Switch-TM/ai-content-platform" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
+                    <span>In Progress</span>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="project-card">
+                <div class="project-card-content">
+                    <h3>Real-time Financial Data Dashboard</h3>
+                    <p>
+                        A high-performance web application providing live financial market data visualization and algorithmic trading insights, built with WebSockets and reactive programming.
+                    </p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Go</span>
+                        <span class="tech-badge">Kafka</span>
+                        <span class="tech-badge">React.js</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Redis</span>
+                    </div>
+                </div>
+                <div class="project-card-footer">
+                    <a href="https://github.com/Switch-TM/finance-dashboard" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
+                    <span>Completed</span>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="project-card">
+                <div class="project-card-content">
+                    <h3>Decentralized Identity Management System</h3>
+                    <p>
+                        An experimental system for secure and self-sovereign digital identities leveraging blockchain principles and cryptographic verification.
+                    </p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">Rust</span>
+                        <span class="tech-badge">Blockchain</span>
+                        <span class="tech-badge">WebAssembly</span>
+                        <span class="tech-badge">Cryptography</span>
+                    </div>
+                </div>
+                <div class="project-card-footer">
+                    <a href="https://github.com/Switch-TM/decentralized-id" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
+                    <span>Research Phase</span>
+                </div>
+            </div>
+
+            <!-- Project Card 4 (Placeholder) -->
+            <div class="project-card">
+                <div class="project-card-content">
+                    <h3>Open-Source Robotics Control Framework</h3>
+                    <p>
+                        A flexible and extensible framework for developing and deploying control algorithms for various robotic platforms.
+                    </p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">C++</span>
+                        <span class="tech-badge">ROS</span>
+                        <span class="tech-badge">Gazebo</span>
+                        <span class="tech-badge">Linux</span>
+                    </div>
+                </div>
+                <div class="project-card-footer">
+                    <a href="https://github.com/Switch-TM/robotics-framework" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View Project
+                    </a>
+                    <span>Planned</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Section -->
+    <section id="engagement">
+        <h2 class="section-title">Engage with Switch™</h2>
+        <div class="engagement-content">
+            <p>
+                Switch™ thrives on collaboration and open exchange. While our primary focus is on engineering impactful solutions, we welcome engagement from fellow innovators, researchers, and organizations.
+            </p>
+            <p>
+                The most direct way to connect and contribute is through our codebase and discussions on GitHub. Dive into our repositories, propose enhancements, report issues, or spark new ideas.
+            </p>
+            <div class="engagement-links">
+                <a href="https://github.com/Switch-TM" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> Visit GitHub Profile
+                </a>
+                <a href="https://github.com/Switch-TM/discussions" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-comments"></i> Start a Discussion
+                </a>
+                <a href="#home" class="scroll-to-top">
+                    <i class="fas fa-angle-up"></i> Back to Top
+                </a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.95em; color: #b0b0b0;">
+                *A dedicated communication channel and community platform for Switch™ initiatives are currently under consideration. Stay tuned for future updates.*
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> Switch™ Engineering. All rights reserved.</p>
+        <p>Pioneering Digital Frontiers.</p>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#engagement">Engage</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Update current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
